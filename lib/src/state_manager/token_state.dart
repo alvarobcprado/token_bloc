@@ -72,9 +72,29 @@ class TokenVoidAction extends TokenAction<void> {
 /// It is used to hold the state of the view. It can be seeded with a initial
 /// value.
 ///
-/// This value can be get and updated with the [valueOf] [valueOrNullOf] and
+/// This value can be get with the [valueOf] [valueOrNullOf] and
 /// [updateStateOf] methods that can be accessed only through the
 /// [TokenStateManager] classes.
+///
+/// Example:
+/// ```dart
+/// class MyStateManager extends TokenStateManager {
+///   MyStateManager() {
+///     // Listen to the counterState and print its value
+///     on<int>(counterState, onData: (value) => print(value));
+///
+///     // Update the counterState with the value of the counterState + 1
+///     updateStateOf(counterState, valueOf(counterState) + 1);
+///   }
+///
+///   @override
+///   List<TokenSubject> get subjects => [
+///     counterState,
+///   ];
+///
+///   final counterState = TokenState.seeded(0);
+/// }
+/// ```
 class TokenState<T> extends TokenSubject<T, BehaviorSubject<T>> {
   TokenState({
     void Function()? onListen,
