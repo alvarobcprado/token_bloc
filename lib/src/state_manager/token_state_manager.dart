@@ -47,7 +47,7 @@ abstract class TokenStateManager {
 
   /// The list of [TokenSubject]s that will be used to manage the state of the
   /// view. It must be implemented.
-  List<TokenSubject> get subjects;
+  List<TokenSubject<dynamic, dynamic>> get subjects;
 
   /// Listens to a [Stream] and adds the events to the [_subscriptions] list.
   ///

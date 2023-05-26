@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:token_state_manager/src/state_manager/token_state_manager.dart';
+import 'package:token_state_manager/src/widgets/widgets.dart';
 
 class GenericStateBuilder2<T1 extends T, T2 extends T, T>
     extends StatelessWidget {
@@ -31,5 +32,3 @@ class GenericStateBuilder2<T1 extends T, T2 extends T, T>
     );
   }
 }
-
-class UnknownStateTypeException implements Exception {}
