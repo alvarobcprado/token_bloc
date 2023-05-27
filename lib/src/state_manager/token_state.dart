@@ -54,8 +54,8 @@ class TokenAction<T> extends TokenSubject<T, PublishSubject<T>> {
 /// final action = TokenVoidAction();
 /// action();
 /// ```
-class TokenVoidAction extends TokenAction<void> {
-  TokenVoidAction({
+class TokenActionVoid extends TokenAction<void> {
+  TokenActionVoid({
     super.onListen,
     super.onCancel,
     super.sync = false,
@@ -64,6 +64,34 @@ class TokenVoidAction extends TokenAction<void> {
   @override
   void call([void value]) {
     _subject.add(null);
+  }
+}
+
+/// A special [TokenSubject] that acts as a [TokenAction] but holds a [TokenState].
+///
+/// It is used to dispatch actions with the [call] method and to hold the state.
+///
+/// Example:
+/// ```dart
+/// final action = TokenActionState<int>.seed(0);
+/// action(1);
+/// ```
+class TokenActionState<T> extends TokenState<T> {
+  TokenActionState({
+    super.onListen,
+    super.onCancel,
+    super.sync = false,
+  });
+
+  TokenActionState.seeded(
+    T state, {
+    super.onListen,
+    super.onCancel,
+    super.sync = false,
+  }) : super.seeded(state);
+
+  void call(T value) {
+    _subject.add(value);
   }
 }
 

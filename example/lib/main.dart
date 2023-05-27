@@ -72,7 +72,7 @@ class MyCounterStateManager extends TokenStateManager {
   }
 
   final counterState = TokenState<int>.seeded(0);
-  final incrementAction = TokenVoidAction();
+  final incrementAction = TokenActionVoid();
 
   void _handleIncrement() {
     updateStateOf(counterState, valueOf(counterState) + 1);
