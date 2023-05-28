@@ -5,13 +5,17 @@ import 'package:rxdart/rxdart.dart';
 
 part './token_state.dart';
 
-extension _TokenStateManagerExtension<T> on TokenState<T> {
-  T get value => this._value;
+typedef TypeCallback<T> = void Function(T value);
 
-  T? get valueOrNull => this._valueOrNull;
+extension _TokenStateManagerExtension<T> on TokenState<T> {
+  T get value => this._stateSubject.value;
+
+  T? get valueOrNull => this._stateSubject.valueOrNull;
+
+  bool get hasValue => this._stateSubject.hasValue;
 
   void add(T newValue) {
-    this._add(newValue);
+    this._stateSubject.add(newValue);
   }
 }
 
@@ -25,9 +29,9 @@ extension _TokenStateManagerExtension<T> on TokenState<T> {
 /// ```dart
 /// class MyStateManager extends TokenStateManager {
 ///  MyStateManager() {
-///  on<int>(counterState, onData: (value) => print(value));
-///  onVoid(incrementAction, onData: () => updateStateOf(counterState, valueOf(counterState) + 1));
-///  onVoid(decrementAction, onData: () => updateStateOf(counterState, valueOf(counterState) - 1));
+///  on<int>(counterState, (value) => print(value));
+///  onVoid(incrementAction, () => updateStateOf(counterState, valueOf(counterState) + 1));
+///  onVoid(decrementAction, () => updateStateOf(counterState, valueOf(counterState) - 1));
 /// }
 ///
 ///  @override
@@ -54,9 +58,9 @@ abstract class TokenStateManager {
   /// It is a wrapper for the [Stream.listen] method.
   void on<T>(
     Stream<T> stream,
-    void Function(T)? onData, {
+    TypeCallback<T>? onData, {
     Function? onError,
-    void Function()? onDone,
+    VoidCallback? onDone,
     bool? cancelOnError,
   }) {
     stream
@@ -71,9 +75,9 @@ abstract class TokenStateManager {
 
   void onVoid(
     Stream<void> stream,
-    void Function()? onData, {
+    VoidCallback? onData, {
     Function? onError,
-    void Function()? onDone,
+    VoidCallback? onDone,
     bool? cancelOnError,
   }) {
     on<void>(
@@ -88,6 +92,7 @@ abstract class TokenStateManager {
   /// Returns the value of a [TokenState].
   ///
   /// It is a wrapper for the [BehaviorSubject.value] getter.
+  @protected
   T valueOf<T>(TokenState<T> state) {
     return state.value;
   }
@@ -95,6 +100,7 @@ abstract class TokenStateManager {
   /// Returns the value of a [TokenState] or null if it has no value.
   ///
   /// It is a wrapper for the [BehaviorSubject.valueOrNull] getter.
+  @protected
   T? valueOrNullOf<T>(TokenState<T> state) {
     return state.valueOrNull;
   }
@@ -102,11 +108,20 @@ abstract class TokenStateManager {
   /// Updates the value of a [TokenState].
   ///
   /// It is a wrapper for the [BehaviorSubject.add] method.
+  @protected
   void updateStateOf<T, S extends T>(TokenState<T> state, S newValue) {
     state.add(newValue);
   }
 
-  /// Closes all the [TokenSubject]s.
+  /// Returns true if the [TokenState] has a value. Otherwise, returns false.
+  ///
+  /// It is a wrapper for the [BehaviorSubject.hasValue] getter.
+  @protected
+  bool hasValueOf<T>(TokenState<T> state) {
+    return state.hasValue;
+  }
+
+  /// Closes all the [TokenSubject]s and cancels all the subscriptions.
   @mustCallSuper
   void dispose() {
     for (final subject in subjects) {

@@ -151,8 +151,4 @@ class TokenState<T> extends TokenSubject<T> {
         );
 
   BehaviorSubject<T> get _stateSubject => _subject as BehaviorSubject<T>;
-
-  T get _value => _stateSubject.value;
-  T? get _valueOrNull => _stateSubject.valueOrNull;
-  void _add(T value) => _stateSubject.add(value);
 }
