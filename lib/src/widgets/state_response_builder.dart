@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:token_state_manager/src/state_manager/token_state_manager.dart';
 
-class StateSnapshotResponseView<Loading extends T, Error extends T,
+class StateResponseBuilder<Loading extends T, Error extends T,
     Success extends T, T> extends StatelessWidget {
-  StateSnapshotResponseView({
+  StateResponseBuilder({
     required this.tokenState,
     required this.successWidgetBuilder,
     required this.onTryAgainTap,
