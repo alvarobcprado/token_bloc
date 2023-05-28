@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class MyCounterStateManager extends TokenStateManager {
   MyCounterStateManager() {
-    onVoid(incrementAction, onData: _handleIncrement);
+    onVoid(incrementAction, _handleIncrement);
   }
 
   final counterState = TokenState<int>.seeded(0);

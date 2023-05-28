@@ -3,12 +3,12 @@ part of './token_state_manager.dart';
 /// The base class for all [TokenSubject]s.
 ///
 /// Holds the subject and exposes only its [stream] getter and [close] method.
-abstract class TokenSubject<T, S extends Subject<T>> extends StreamView<T> {
+abstract class TokenSubject<T> extends StreamView<T> {
   TokenSubject(
     this._subject,
   ) : super(_subject.stream);
 
-  final S _subject;
+  final Subject<T> _subject;
 
   Stream<T> get stream => _subject.stream;
 
@@ -26,7 +26,7 @@ abstract class TokenSubject<T, S extends Subject<T>> extends StreamView<T> {
 /// final action = TokenAction<int>();
 /// action(1);
 /// ```
-class TokenAction<T> extends TokenSubject<T, PublishSubject<T>> {
+class TokenAction<T> extends TokenSubject<T> {
   TokenAction({
     void Function()? onListen,
     void Function()? onCancel,
@@ -123,7 +123,7 @@ class TokenActionState<T> extends TokenState<T> {
 ///   final counterState = TokenState.seeded(0);
 /// }
 /// ```
-class TokenState<T> extends TokenSubject<T, BehaviorSubject<T>> {
+class TokenState<T> extends TokenSubject<T> {
   TokenState({
     void Function()? onListen,
     void Function()? onCancel,
@@ -150,7 +150,9 @@ class TokenState<T> extends TokenSubject<T, BehaviorSubject<T>> {
           ),
         );
 
-  T get _value => _subject.value;
-  T? get _valueOrNull => _subject.valueOrNull;
-  void _add(T value) => _subject.add(value);
+  BehaviorSubject<T> get _stateSubject => _subject as BehaviorSubject<T>;
+
+  T get _value => _stateSubject.value;
+  T? get _valueOrNull => _stateSubject.valueOrNull;
+  void _add(T value) => _stateSubject.add(value);
 }

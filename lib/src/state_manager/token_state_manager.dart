@@ -47,14 +47,14 @@ abstract class TokenStateManager {
 
   /// The list of [TokenSubject]s that will be used to manage the state of the
   /// view. It must be implemented.
-  List<TokenSubject<dynamic, dynamic>> get subjects;
+  List<TokenSubject> get subjects;
 
   /// Listens to a [Stream] and adds the events to the [_subscriptions] list.
   ///
   /// It is a wrapper for the [Stream.listen] method.
   void on<T>(
-    Stream<T> stream, {
-    void Function(T)? onData,
+    Stream<T> stream,
+    void Function(T)? onData, {
     Function? onError,
     void Function()? onDone,
     bool? cancelOnError,
@@ -70,15 +70,15 @@ abstract class TokenStateManager {
   }
 
   void onVoid(
-    Stream<void> stream, {
-    void Function()? onData,
+    Stream<void> stream,
+    void Function()? onData, {
     Function? onError,
     void Function()? onDone,
     bool? cancelOnError,
   }) {
     on<void>(
       stream,
-      onData: (_) => onData?.call(),
+      (_) => onData?.call(),
       onError: onError,
       onDone: onDone,
       cancelOnError: cancelOnError,
