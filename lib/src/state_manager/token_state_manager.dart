@@ -56,6 +56,7 @@ abstract class TokenStateManager {
   /// Listens to a [Stream] and adds the events to the [_subscriptions] list.
   ///
   /// It is a wrapper for the [Stream.listen] method.
+  @protected
   void on<T>(
     Stream<T> stream,
     TypeCallback<T>? onData, {
@@ -73,6 +74,7 @@ abstract class TokenStateManager {
         .addTo(_subscriptions);
   }
 
+  @protected
   void onVoid(
     Stream<void> stream,
     VoidCallback? onData, {
