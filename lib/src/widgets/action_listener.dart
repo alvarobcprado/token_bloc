@@ -4,25 +4,25 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:token_state_manager/src/state_manager/token_state_manager.dart';
 
-class ActionHandler<T> extends StatefulWidget {
-  const ActionHandler({
+class ActionListener<T> extends StatefulWidget {
+  const ActionListener({
     required this.child,
     required this.tokenAction,
-    required this.onReceived,
-    this.handleWhen,
+    required this.onAction,
+    this.listenWhen,
     super.key,
   });
 
   final Widget child;
   final TokenAction<T> tokenAction;
-  final void Function(T action) onReceived;
-  final bool Function(T? previosAction, T currentAction)? handleWhen;
+  final void Function(T action) onAction;
+  final bool Function(T? previosAction, T currentAction)? listenWhen;
 
   @override
-  _ActionHandlerState<T> createState() => _ActionHandlerState<T>();
+  _ActionListenerState<T> createState() => _ActionListenerState<T>();
 }
 
-class _ActionHandlerState<T> extends State<ActionHandler<T>> {
+class _ActionListenerState<T> extends State<ActionListener<T>> {
   late final StreamSubscription<T> _subscription;
   T? _previousAction;
 
@@ -39,8 +39,8 @@ class _ActionHandlerState<T> extends State<ActionHandler<T>> {
   }
 
   void _handleAction(T action) {
-    if (widget.handleWhen?.call(_previousAction, action) ?? true) {
-      widget.onReceived(action);
+    if (widget.listenWhen?.call(_previousAction, action) ?? true) {
+      widget.onAction(action);
     }
     _previousAction = action;
   }
