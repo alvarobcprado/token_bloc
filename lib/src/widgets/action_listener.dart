@@ -4,7 +4,14 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:token_state_manager/src/state_manager/token_state_manager.dart';
 
+/// {@template action_listener}
+/// Widget that listens to a [TokenAction] and calls [onAction] when it emits.
+///
+/// The [listenWhen] is called every time the [TokenAction] emits and if it returns true,
+/// [onAction] is called.
+/// {@endtemplate}
 class ActionListener<T> extends StatefulWidget {
+  /// {@macro action_listener}
   const ActionListener({
     required this.child,
     required this.tokenAction,
@@ -13,9 +20,16 @@ class ActionListener<T> extends StatefulWidget {
     super.key,
   });
 
+  /// The child widget.
   final Widget child;
+
+  /// The [TokenAction] to listen to.
   final TokenAction<T> tokenAction;
+
+  /// The function to call when [tokenAction] emits.
   final void Function(T action) onAction;
+
+  /// The function that determines if [onAction] should be called.
   final bool Function(T? previosAction, T currentAction)? listenWhen;
 
   @override

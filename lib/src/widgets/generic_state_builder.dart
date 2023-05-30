@@ -2,17 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:token_state_manager/src/state_manager/token_state_manager.dart';
 import 'package:token_state_manager/src/widgets/widgets.dart';
 
+/// {@template generic_state_builder}
+/// Widget that builds based on the state of a [TokenState] wich 2 generic
+/// states of type [T1] and [T2].
+///
+/// If [tokenState] has no one of the 2 generic states, an [UnknownStateTypeException]
+/// is thrown.
+/// {@endtemplate}
 class GenericStateBuilder2<T1 extends T, T2 extends T, T>
     extends StatelessWidget {
-  GenericStateBuilder2({
+  /// {@macro generic_state_builder}
+  const GenericStateBuilder2({
     required this.tokenState,
     required this.builder1,
     required this.builder2,
     super.key,
-  }) : assert(T != dynamic);
+  });
 
+  /// The [TokenState] to build the widget based on.
   final TokenState<T> tokenState;
+
+  /// The widget builder for the [T1] or null state.
   final Widget Function(BuildContext context, T1? data) builder1;
+
+  /// The widget builder for the [T2] state.
   final Widget Function(BuildContext context, T2 data) builder2;
 
   @override

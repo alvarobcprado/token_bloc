@@ -3,18 +3,37 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:token_state_manager/src/state_manager/token_state_manager.dart';
 
+/// {@template single_state_builder}
+/// Widget that builds based on the state of a [TokenState].
+///
+/// The [builder] is called every time the [tokenState] emits a new state.
+///
+/// If [buildWhen] is provided, the [builder] is called only when [buildWhen]
+/// returns true.
+///
+/// If [emptyState] is provided, it is shown when the [tokenState] has no state.
+/// By default, it is a [SizedBox.shrink()].
+/// {@endtemplate}
 class SingleStateBuilder<T> extends StatefulWidget {
-  SingleStateBuilder({
+  /// {@macro single_state_builder}
+  const SingleStateBuilder({
     required this.tokenState,
     required this.builder,
     this.emptyState = const SizedBox.shrink(),
-    this.handleWhen,
+    this.buildWhen,
     super.key,
   });
 
+  /// The [TokenState] to build the widget based on.
   final TokenState<T> tokenState;
+
+  /// The widget builder for the [TokenState].
   final Widget Function(BuildContext context, T state) builder;
-  final bool Function(T? previousState, T currentState)? handleWhen;
+
+  /// The function that determines if the [builder] should be rebuilt.
+  final bool Function(T? previousState, T currentState)? buildWhen;
+
+  /// The widget to show when the [tokenState] has no state.
   final Widget emptyState;
 
   @override
@@ -39,7 +58,7 @@ class _SingleStateBuilderState<T> extends State<SingleStateBuilder<T>> {
   }
 
   _handleState(T state) {
-    if (widget.handleWhen?.call(_previousState, state) ?? true) {
+    if (widget.buildWhen?.call(_previousState, state) ?? true) {
       setState(() {
         _currentState = state;
       });
