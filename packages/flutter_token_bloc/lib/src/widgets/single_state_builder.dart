@@ -70,6 +70,6 @@ class _SingleStateBuilderState<T> extends State<SingleStateBuilder<T>> {
   Widget build(BuildContext context) {
     return _currentState == null
         ? widget.emptyState
-        : widget.builder(context, _currentState!);
+        : widget.builder(context, _currentState as T);
   }
 }

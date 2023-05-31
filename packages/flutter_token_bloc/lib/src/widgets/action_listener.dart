@@ -1,4 +1,4 @@
-// ignore_for_file: inference_failure_on_function_return_type
+// ignore_for_file: inference_failure_on_function_return_type, library_private_types_in_public_api
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
