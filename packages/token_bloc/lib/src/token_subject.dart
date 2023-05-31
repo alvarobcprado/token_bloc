@@ -154,13 +154,13 @@ class TokenState<T> extends TokenSubject<T> {
 }
 
 extension _TokenStateManagerExtension<T> on TokenState<T> {
-  T get value => this._stateSubject.value;
+  T get value => _stateSubject.value;
 
-  T? get valueOrNull => this._stateSubject.valueOrNull;
+  T? get valueOrNull => _stateSubject.valueOrNull;
 
-  bool get hasValue => this._stateSubject.hasValue;
+  bool get hasValue => _stateSubject.hasValue;
 
   void add(T newValue) {
-    this._stateSubject.add(newValue);
+    _stateSubject.add(newValue);
   }
 }

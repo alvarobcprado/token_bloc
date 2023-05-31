@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:token_bloc/src/state_manager/token_bloc.dart';
-import 'package:token_bloc/src/widgets/widgets.dart';
+import 'package:flutter_token_bloc/flutter_token_bloc.dart';
 
 /// {@template generic_state_builder}
 /// Widget that builds based on the state of a [TokenState] wich 2 generic

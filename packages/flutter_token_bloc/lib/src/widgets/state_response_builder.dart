@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:token_bloc/src/state_manager/token_bloc.dart';
+import 'package:token_bloc/token_bloc.dart';
 
 /// {@template state_response_builder}
 /// Widget that builds based on the state of a [TokenState] wich has 3 basic

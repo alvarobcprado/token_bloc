@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  token_bloc:
+  flutter_token_bloc:
     path: ../
 
 

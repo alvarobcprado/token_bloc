@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:token_bloc/src/state_manager/token_bloc.dart';
+import 'package:token_bloc/token_bloc.dart';
 
 /// {@template single_state_builder}
 /// Widget that builds based on the state of a [TokenState].
@@ -70,6 +70,6 @@ class _SingleStateBuilderState<T> extends State<SingleStateBuilder<T>> {
   Widget build(BuildContext context) {
     return _currentState == null
         ? widget.emptyState
-        : widget.builder(context, _currentState!);
+        : widget.builder(context, _currentState as T);
   }
 }

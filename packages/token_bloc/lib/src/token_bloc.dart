@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'token_subject.dart';
 
 typedef TypeCallback<T> = void Function(T value);
+typedef VoidCallback = void Function();
 
 /// A [TokenBloc] is a class that holds a list of [TokenSubject]s that
 /// can be used to manage the state of the view.

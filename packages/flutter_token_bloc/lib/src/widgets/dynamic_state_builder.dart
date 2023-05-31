@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:token_bloc/src/state_manager/token_bloc.dart';
+import 'package:token_bloc/token_bloc.dart';
+import 'package:token_bloc/token_rx_utils.dart';
 
 /// {@template dynamic_state_builder}
 /// Widget that builds based on the state of all [TokenState]s of a [TokenBloc].
