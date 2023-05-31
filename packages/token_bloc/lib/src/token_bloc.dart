@@ -46,6 +46,7 @@ abstract class TokenBloc {
   ///
   /// It is a wrapper for the [Stream.listen] method.
   @protected
+  @visibleForTesting
   void on<T>(
     Stream<T> stream,
     TypeCallback<T>? onData, {
@@ -64,6 +65,7 @@ abstract class TokenBloc {
   }
 
   @protected
+  @visibleForTesting
   void onVoid(
     Stream<void> stream,
     VoidCallback? onData, {
@@ -84,6 +86,7 @@ abstract class TokenBloc {
   ///
   /// It is a wrapper for the [BehaviorSubject.value] getter.
   @protected
+  @visibleForTesting
   T valueOf<T>(TokenState<T> state) {
     return state.value;
   }
@@ -92,6 +95,7 @@ abstract class TokenBloc {
   ///
   /// It is a wrapper for the [BehaviorSubject.valueOrNull] getter.
   @protected
+  @visibleForTesting
   T? valueOrNullOf<T>(TokenState<T> state) {
     return state.valueOrNull;
   }
@@ -100,6 +104,7 @@ abstract class TokenBloc {
   ///
   /// It is a wrapper for the [BehaviorSubject.add] method.
   @protected
+  @visibleForTesting
   void updateStateOf<T, S extends T>(TokenState<T> state, S newValue) {
     state.add(newValue);
   }
@@ -108,6 +113,7 @@ abstract class TokenBloc {
   ///
   /// It is a wrapper for the [BehaviorSubject.hasValue] getter.
   @protected
+  @visibleForTesting
   bool hasValueOf<T>(TokenState<T> state) {
     return state.hasValue;
   }
