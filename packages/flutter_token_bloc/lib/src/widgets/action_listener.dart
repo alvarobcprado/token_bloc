@@ -2,7 +2,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:token_bloc/src/state_manager/token_bloc.dart';
+import 'package:token_bloc/token_bloc.dart';
 
 /// {@template action_listener}
 /// Widget that listens to a [TokenAction] and calls [onAction] when it emits.

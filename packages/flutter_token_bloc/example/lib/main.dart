@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:token_bloc/token_bloc.dart';
+import 'package:flutter_token_bloc/flutter_token_bloc.dart';
 
 void main() {
   runApp(const MyApp());
