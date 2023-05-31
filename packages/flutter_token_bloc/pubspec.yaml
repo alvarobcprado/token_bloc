@@ -11,7 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   token_bloc:
-    path: ../token_bloc
+    git:
+      url: https://github.com/alvarobcprado/token_bloc
+      path: packages/token_bloc
 
 dev_dependencies:
   flutter_test:

@@ -194,9 +194,11 @@ packages:
   token_bloc:
     dependency: transitive
     description:
-      path: "../../token_bloc"
-      relative: true
-    source: path
+      path: "packages/token_bloc"
+      ref: HEAD
+      resolved-ref: "2fe26a84331e558785502ec4015e08c593b72c21"
+      url: "https://github.com/alvarobcprado/token_bloc"
+    source: git
     version: "1.0.0"
   vector_math:
     dependency: transitive
