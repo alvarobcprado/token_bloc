@@ -153,7 +153,8 @@ class TokenState<T> extends TokenSubject<T> {
   BehaviorSubject<T> get _stateSubject => _subject as BehaviorSubject<T>;
 }
 
-extension _TokenStateManagerExtension<T> on TokenState<T> {
+@visibleForTesting
+extension TokenBlocExtension<T> on TokenState<T> {
   T get value => _stateSubject.value;
 
   T? get valueOrNull => _stateSubject.valueOrNull;
