@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:token_state_manager/src/state_manager/token_state_manager.dart';
+import 'package:token_bloc/src/state_manager/token_bloc.dart';
 
 /// {@template single_state_builder}
 /// Widget that builds based on the state of a [TokenState].

@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  token_state_manager:
+  token_bloc:
     path: ../
 
 

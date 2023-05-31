@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:token_state_manager/token_state_manager.dart';
+import 'package:token_bloc/token_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class MyCounterStateManager extends TokenStateManager {
+class MyCounterStateManager extends TokenBloc {
   MyCounterStateManager() {
     onVoid(incrementAction, _handleIncrement);
   }
