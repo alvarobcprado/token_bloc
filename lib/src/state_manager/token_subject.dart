@@ -1,4 +1,4 @@
-part of './token_state_manager.dart';
+part of 'token_bloc.dart';
 
 /// The base class for all [TokenSubject]s.
 ///
@@ -102,7 +102,7 @@ class TokenActionState<T> extends TokenState<T> {
 ///
 /// This value can be get with the [valueOf] [valueOrNullOf] and
 /// [updateStateOf] methods that can be accessed only through the
-/// [TokenStateManager] classes.
+/// [TokenBloc] classes.
 ///
 /// Example:
 /// ```dart
@@ -151,4 +151,16 @@ class TokenState<T> extends TokenSubject<T> {
         );
 
   BehaviorSubject<T> get _stateSubject => _subject as BehaviorSubject<T>;
+}
+
+extension _TokenStateManagerExtension<T> on TokenState<T> {
+  T get value => this._stateSubject.value;
+
+  T? get valueOrNull => this._stateSubject.valueOrNull;
+
+  bool get hasValue => this._stateSubject.hasValue;
+
+  void add(T newValue) {
+    this._stateSubject.add(newValue);
+  }
 }

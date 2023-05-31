@@ -3,23 +3,11 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
-part './token_state.dart';
+part 'token_subject.dart';
 
 typedef TypeCallback<T> = void Function(T value);
 
-extension _TokenStateManagerExtension<T> on TokenState<T> {
-  T get value => this._stateSubject.value;
-
-  T? get valueOrNull => this._stateSubject.valueOrNull;
-
-  bool get hasValue => this._stateSubject.hasValue;
-
-  void add(T newValue) {
-    this._stateSubject.add(newValue);
-  }
-}
-
-/// A [TokenStateManager] is a class that holds a list of [TokenSubject]s that
+/// A [TokenBloc] is a class that holds a list of [TokenSubject]s that
 /// can be used to manage the state of the view.
 ///
 /// It must be extended and the [subjects] must be implemented with the list of
@@ -46,7 +34,7 @@ extension _TokenStateManagerExtension<T> on TokenState<T> {
 ///  final decrementAction = TokenVoidAction();
 /// }
 /// ```
-abstract class TokenStateManager {
+abstract class TokenBloc {
   final CompositeSubscription _subscriptions = CompositeSubscription();
 
   /// The list of [TokenSubject]s that will be used to manage the state of the
