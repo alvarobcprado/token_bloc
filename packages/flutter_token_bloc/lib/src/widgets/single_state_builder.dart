@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:token_bloc/token_bloc.dart';
 
 /// {@template single_state_builder}
-/// Widget that builds based on the state of a [TokenState].
+/// Widget that builds based on the state of a [TokenState] with type [T].
 ///
 /// The [builder] is called every time the [tokenState] emits a new state.
 ///
 /// If [buildWhen] is provided, the [builder] is called only when [buildWhen]
 /// returns true.
 ///
-/// If [emptyState] is provided, it is shown when the [tokenState] has no state.
-/// By default, it is a [SizedBox.shrink()].
+/// If [emptyState] is provided, it is shown when the [tokenState] has no state
+/// emitted. By default, it is a SizedBox.shrink().
 /// {@endtemplate}
 class SingleStateBuilder<T> extends StatefulWidget {
   /// {@macro single_state_builder}
@@ -57,7 +57,7 @@ class _SingleStateBuilderState<T> extends State<SingleStateBuilder<T>> {
     super.dispose();
   }
 
-  _handleState(T state) {
+  void _handleState(T state) {
     if (widget.buildWhen?.call(_previousState, state) ?? true) {
       setState(() {
         _currentState = state;

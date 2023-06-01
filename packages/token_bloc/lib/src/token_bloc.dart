@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'dart:async';
 
 import 'package:meta/meta.dart';
@@ -5,14 +7,17 @@ import 'package:rxdart/rxdart.dart';
 
 part 'token_subject.dart';
 
+/// Type callback that takes a value of type [T].
 typedef TypeCallback<T> = void Function(T value);
+
+/// Void callback.
 typedef VoidCallback = void Function();
 
 /// A [TokenBloc] is a class that holds a list of [TokenSubject]s that
-/// can be used to manage the state of the view.
+/// can be used to manage the state using the BLoC design pattern.
 ///
 /// It must be extended and the [subjects] must be implemented with the list of
-/// [TokenSubject]s that will be used to manage the state of the view.
+/// [TokenSubject]s that will be used to manage the state.
 ///
 /// Example of usage:
 /// ```dart
@@ -38,13 +43,13 @@ typedef VoidCallback = void Function();
 abstract class TokenBloc {
   final CompositeSubscription _subscriptions = CompositeSubscription();
 
-  /// The list of [TokenSubject]s that will be used to manage the state of the
-  /// view. It must be implemented.
-  List<TokenSubject> get subjects;
+  /// The list of [TokenSubject]s that will be used to manage the state.
+  /// It must be implemented in the [TokenBloc] classes to disposes the
+  /// [TokenSubject]s correctly.
+  List<TokenSubject<dynamic>> get subjects;
 
-  /// Listens to a [Stream] and adds the events to the [_subscriptions] list.
-  ///
-  /// It is a wrapper for the [Stream.listen] method.
+  /// Listens to a [Stream] with type [T] and cancels the subscription when the
+  /// [TokenBloc] is disposed.
   @protected
   @visibleForTesting
   void on<T>(
@@ -64,6 +69,8 @@ abstract class TokenBloc {
         .addTo(_subscriptions);
   }
 
+  /// Listens to a [Stream] with [void] type and cancels the subscription when
+  /// the [TokenBloc] is disposed.
   @protected
   @visibleForTesting
   void onVoid(
@@ -82,36 +89,29 @@ abstract class TokenBloc {
     );
   }
 
-  /// Returns the value of a [TokenState].
-  ///
-  /// It is a wrapper for the [BehaviorSubject.value] getter.
+  /// Returns the last emmited value of the given [TokenState].
   @protected
   @visibleForTesting
   T valueOf<T>(TokenState<T> state) {
     return state.value;
   }
 
-  /// Returns the value of a [TokenState] or null if it has no value.
-  ///
-  /// It is a wrapper for the [BehaviorSubject.valueOrNull] getter.
+  /// Returns the last emmited value of the given [TokenState] or null if the
+  /// [TokenState] has no value emmited.
   @protected
   @visibleForTesting
   T? valueOrNullOf<T>(TokenState<T> state) {
     return state.valueOrNull;
   }
 
-  /// Updates the value of a [TokenState].
-  ///
-  /// It is a wrapper for the [BehaviorSubject.add] method.
+  /// Emits the given [newValue] to the given [TokenState].
   @protected
   @visibleForTesting
   void updateStateOf<T, S extends T>(TokenState<T> state, S newValue) {
     state.add(newValue);
   }
 
-  /// Returns true if the [TokenState] has a value. Otherwise, returns false.
-  ///
-  /// It is a wrapper for the [BehaviorSubject.hasValue] getter.
+  /// Returns true if the [TokenState] has at least one value emmited.
   @protected
   @visibleForTesting
   bool hasValueOf<T>(TokenState<T> state) {

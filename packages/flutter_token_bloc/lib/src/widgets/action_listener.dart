@@ -1,14 +1,15 @@
-// ignore_for_file: inference_failure_on_function_return_type, library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:token_bloc/token_bloc.dart';
 
 /// {@template action_listener}
-/// Widget that listens to a [TokenAction] and calls [onAction] when it emits.
+/// Widget that listens to a [TokenAction] with type [T] and calls [onAction]
+/// when it emits.
 ///
-/// The [listenWhen] is called every time the [TokenAction] emits and if it returns true,
-/// [onAction] is called.
+/// The [listenWhen] is called every time the [TokenAction] emits and if it
+/// returns true, [onAction] is called.
 /// {@endtemplate}
 class ActionListener<T> extends StatefulWidget {
   /// {@macro action_listener}

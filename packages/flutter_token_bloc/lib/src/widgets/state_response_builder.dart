@@ -11,8 +11,8 @@ import 'package:token_bloc/token_bloc.dart';
 /// If [errorWidgetBuilder] is not provided, a [Text] with the text 'Error' is
 /// shown.
 ///
-/// If [tokenState] has no one of the 3 basic states, an [UnknownStateTypeException]
-/// is thrown.
+/// If [tokenState] has no one of the 3 basic states, an
+/// [UnknownStateTypeException] is thrown.
 /// {@endtemplate}
 class StateResponseBuilder<Loading extends T, Error extends T,
     Success extends T, T> extends StatelessWidget {
@@ -85,4 +85,5 @@ class StateResponseBuilder<Loading extends T, Error extends T,
   }
 }
 
+/// Exception thrown when the [TokenState] has an unknown type.
 class UnknownStateTypeException implements Exception {}

@@ -1,22 +1,28 @@
 part of 'token_bloc.dart';
 
+/// {@template token_subject}
 /// The base class for all [TokenSubject]s.
 ///
 /// Holds the subject and exposes only its [stream] getter and [close] method.
+/// {@endtemplate}
 abstract class TokenSubject<T> extends StreamView<T> {
+  /// {@macro token_subject}
   TokenSubject(
     this._subject,
   ) : super(_subject.stream);
 
   final Subject<T> _subject;
 
+  /// The [Stream] of the [Subject].
   Stream<T> get stream => _subject.stream;
 
+  /// Closes the [Subject].
   void close() {
     _subject.close();
   }
 }
 
+/// {@template token_state}
 /// A [TokenSubject] that holds a [PublishSubject].
 ///
 /// It is used to dispatch actions with the [call] method.
@@ -26,7 +32,9 @@ abstract class TokenSubject<T> extends StreamView<T> {
 /// final action = TokenAction<int>();
 /// action(1);
 /// ```
+/// {@endtemplate}
 class TokenAction<T> extends TokenSubject<T> {
+  /// {@macro token_state}
   TokenAction({
     void Function()? onListen,
     void Function()? onCancel,
@@ -39,12 +47,14 @@ class TokenAction<T> extends TokenSubject<T> {
           ),
         );
 
+  /// Sends an event T to the subject.
   void call(T value) {
     _subject.add(value);
   }
 }
 
-/// A [TokenAction] that holds [PublishSubject] with no value.
+/// {@template token_state}
+/// A [TokenAction] that holds [PublishSubject] with a void type.
 ///
 /// It is used to dispatch actions with the [call] method without passing a
 /// value.
@@ -54,7 +64,9 @@ class TokenAction<T> extends TokenSubject<T> {
 /// final action = TokenVoidAction();
 /// action();
 /// ```
+/// {@endtemplate}
 class TokenActionVoid extends TokenAction<void> {
+  /// {@macro token_state}
   TokenActionVoid({
     super.onListen,
     super.onCancel,
@@ -67,41 +79,48 @@ class TokenActionVoid extends TokenAction<void> {
   }
 }
 
-/// A special [TokenSubject] that acts as a [TokenAction] but holds a [TokenState].
+/// {@template token_state}
+/// A special [TokenSubject] that acts as a [TokenAction] but holds a
+/// [TokenState].
 ///
 /// It is used to dispatch actions with the [call] method and to hold the state.
 ///
 /// Example:
 /// ```dart
-/// final action = TokenActionState<int>.seed(0);
+/// final action = TokenActionState<int>.seeded(0);
 /// action(1);
 /// ```
+/// {@endtemplate}
 class TokenActionState<T> extends TokenState<T> {
+  /// {@macro token_state}
   TokenActionState({
     super.onListen,
     super.onCancel,
     super.sync = false,
   });
 
+  /// {@macro token_state}
   TokenActionState.seeded(
-    T state, {
+    super.state, {
     super.onListen,
     super.onCancel,
     super.sync = false,
-  }) : super.seeded(state);
+  }) : super.seeded();
 
+  /// Sends an event T to the subject.
   void call(T value) {
     _subject.add(value);
   }
 }
 
+/// {@template token_state}
 /// A [TokenSubject] that holds a [BehaviorSubject].
 ///
-/// It is used to hold the state of the view. It can be seeded with a initial
+/// It is used to hold the last emmited state. It can be seeded with a initial
 /// value.
 ///
-/// This value can be get with the [valueOf] [valueOrNullOf] and
-/// [updateStateOf] methods that can be accessed only through the
+/// This state can be get with the valueOf or valueOrNullOf methods and can be
+/// updated with the updateStateOf method that can be accessed only through the
 /// [TokenBloc] classes.
 ///
 /// Example:
@@ -123,7 +142,9 @@ class TokenActionState<T> extends TokenState<T> {
 ///   final counterState = TokenState.seeded(0);
 /// }
 /// ```
+/// {@endtemplate}
 class TokenState<T> extends TokenSubject<T> {
+  /// {@macro token_state}
   TokenState({
     void Function()? onListen,
     void Function()? onCancel,
@@ -136,6 +157,7 @@ class TokenState<T> extends TokenSubject<T> {
           ),
         );
 
+  /// {@macro token_state}
   TokenState.seeded(
     T state, {
     void Function()? onListen,
@@ -153,14 +175,21 @@ class TokenState<T> extends TokenSubject<T> {
   BehaviorSubject<T> get _stateSubject => _subject as BehaviorSubject<T>;
 }
 
+/// An extension that exposes the [TokenState] methods to the [TokenBloc]s.
+/// Should not be used outside of the [TokenBloc]s.
 @visibleForTesting
 extension TokenBlocExtension<T> on TokenState<T> {
+  /// Returns the last emitted value of the [TokenState].
   T get value => _stateSubject.value;
 
+  /// Returns the last emitted value of the [TokenState] or null if no value
+  /// has been emitted.
   T? get valueOrNull => _stateSubject.valueOrNull;
 
+  /// Returns true if the [TokenState] has emitted at least one value.
   bool get hasValue => _stateSubject.hasValue;
 
+  /// Sends an event T to the subject.
   void add(T newValue) {
     _stateSubject.add(newValue);
   }

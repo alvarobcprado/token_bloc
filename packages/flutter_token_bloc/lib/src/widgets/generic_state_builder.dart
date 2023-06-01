@@ -5,8 +5,8 @@ import 'package:flutter_token_bloc/flutter_token_bloc.dart';
 /// Widget that builds based on the state of a [TokenState] wich 2 generic
 /// states of type [T1] and [T2].
 ///
-/// If [tokenState] has no one of the 2 generic states, an [UnknownStateTypeException]
-/// is thrown.
+/// If [tokenState] has no one of the 2 generic states, an
+/// [UnknownStateTypeException] is thrown.
 /// {@endtemplate}
 class GenericStateBuilder2<T1 extends T, T2 extends T, T>
     extends StatelessWidget {
