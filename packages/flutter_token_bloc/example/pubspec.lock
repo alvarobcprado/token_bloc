@@ -196,7 +196,7 @@ packages:
     description:
       path: "packages/token_bloc"
       ref: HEAD
-      resolved-ref: "2fe26a84331e558785502ec4015e08c593b72c21"
+      resolved-ref: dbd6b58afa832db6e0da266b81ee1515d00856f6
       url: "https://github.com/alvarobcprado/token_bloc"
     source: git
     version: "1.0.0"

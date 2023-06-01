@@ -25,7 +25,7 @@ abstract class TokenSubject<T> extends StreamView<T> {
 /// {@template token_state}
 /// A [TokenSubject] that holds a [PublishSubject].
 ///
-/// It is used to dispatch actions with the [call] method.
+/// It is used to dispatch actions with type [T] for [TokenBloc] process it.
 ///
 /// Example:
 /// ```dart
@@ -56,8 +56,7 @@ class TokenAction<T> extends TokenSubject<T> {
 /// {@template token_state}
 /// A [TokenAction] that holds [PublishSubject] with a void type.
 ///
-/// It is used to dispatch actions with the [call] method without passing a
-/// value.
+/// It is used to dispatch actions without a value for [TokenBloc] process it.
 ///
 /// Example:
 /// ```dart
@@ -83,7 +82,8 @@ class TokenActionVoid extends TokenAction<void> {
 /// A special [TokenSubject] that acts as a [TokenAction] but holds a
 /// [TokenState].
 ///
-/// It is used to dispatch actions with the [call] method and to hold the state.
+/// It is used to dispatch actions with type [T] for [TokenBloc] process it and
+/// to hold the last dispatched action. It can be seeded with a initial value.
 ///
 /// Example:
 /// ```dart
@@ -116,22 +116,23 @@ class TokenActionState<T> extends TokenState<T> {
 /// {@template token_state}
 /// A [TokenSubject] that holds a [BehaviorSubject].
 ///
-/// It is used to hold the last emmited state. It can be seeded with a initial
-/// value.
+/// It is used to emit states with type [T] from [TokenBloc] to be listened and
+/// to hold the last emitted state. It can be seeded with a initial value.
+///
 ///
 /// This state can be get with the valueOf or valueOrNullOf methods and can be
-/// updated with the updateStateOf method that can be accessed only through the
+/// emitted with the emitStateOf method that can be accessed only through the
 /// [TokenBloc] classes.
 ///
 /// Example:
 /// ```dart
-/// class MyStateManager extends TokenStateManager {
+/// class MyStateManager extends TokenBloc {
 ///   MyStateManager() {
 ///     // Listen to the counterState and print its value
 ///     on<int>(counterState, onData: (value) => print(value));
 ///
 ///     // Update the counterState with the value of the counterState + 1
-///     updateStateOf(counterState, valueOf(counterState) + 1);
+///     emitStateOf(counterState, valueOf(counterState) + 1);
 ///   }
 ///
 ///   @override
@@ -175,10 +176,59 @@ class TokenState<T> extends TokenSubject<T> {
   BehaviorSubject<T> get _stateSubject => _subject as BehaviorSubject<T>;
 }
 
+/// {@template token_effect}
+/// A [TokenSubject] that holds a [PublishSubject].
+///
+/// It is used to dispatch effects from the [TokenBloc]s to be listened.
+///
+/// Example:
+/// ```dart
+/// class MyStateManager extends TokenBloc {
+///   MyStateManager() {
+///     // Listen to the counterState and print its value
+///     on<int>(counterState, onData: (value) {
+///       if (value.isEven) {
+///         emitEffectOf(counterEffect, 'Even');
+///       } else {
+///         emitEffectOf(counterEffect, 'Odd');
+///       }
+///     });
+///
+///     // Update the counterState with the value of the counterState + 1
+///     emitStateOf(counterState, valueOf(counterState) + 1);
+///   }
+///
+///   @override
+///   List<TokenSubject> get subjects => [
+///     counterState,
+///     counterEffect,
+///   ];
+///
+///   final counterState = TokenState.seeded(0);
+///   final counterEffect = TokenEffect<String>();
+/// }
+/// ```
+/// {@endtemplate}
+///
+class TokenEffect<T> extends TokenSubject<T> {
+  /// {@macro token_state}
+  TokenEffect({
+    void Function()? onListen,
+    void Function()? onCancel,
+    bool sync = false,
+  }) : super(
+          PublishSubject<T>(
+            onListen: onListen,
+            onCancel: onCancel,
+            sync: sync,
+          ),
+        );
+}
+
 /// An extension that exposes the [TokenState] methods to the [TokenBloc]s.
 /// Should not be used outside of the [TokenBloc]s.
 @visibleForTesting
-extension TokenBlocExtension<T> on TokenState<T> {
+extension TokenBlocStateExtension<T> on TokenState<T> {
   /// Returns the last emitted value of the [TokenState].
   @visibleForTesting
   T get value => _stateSubject.value;
@@ -196,5 +246,16 @@ extension TokenBlocExtension<T> on TokenState<T> {
   @visibleForTesting
   void add(T newValue) {
     _stateSubject.add(newValue);
+  }
+}
+
+/// An extension that exposes the [TokenEffect] methods to the [TokenBloc]s.
+/// Should not be used outside of the [TokenBloc]s.
+@visibleForTesting
+extension TokenBlocEffectExtension<T> on TokenEffect<T> {
+  /// Sends an event T to the subject.
+  @visibleForTesting
+  void add(T newValue) {
+    _subject.add(newValue);
   }
 }

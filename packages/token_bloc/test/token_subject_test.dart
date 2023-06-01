@@ -91,4 +91,25 @@ void main() {
       );
     },
   );
+
+  group(
+    'TokenEffect',
+    () {
+      test(
+        'should dispatch an event to the subject',
+        () async {
+          var value = 0;
+          TokenEffect<int>()
+            ..stream.listen((event) {
+              value = event;
+            })
+            ..add(10);
+
+          await Future<void>.delayed(Duration.zero);
+
+          expect(value, 10);
+        },
+      );
+    },
+  );
 }

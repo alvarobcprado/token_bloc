@@ -92,30 +92,37 @@ abstract class TokenBloc {
   /// Returns the last emmited value of the given [TokenState].
   @protected
   @visibleForTesting
-  T valueOf<T>(TokenState<T> state) {
-    return state.value;
+  T valueOf<T>(TokenState<T> tokenState) {
+    return tokenState.value;
   }
 
   /// Returns the last emmited value of the given [TokenState] or null if the
   /// [TokenState] has no value emmited.
   @protected
   @visibleForTesting
-  T? valueOrNullOf<T>(TokenState<T> state) {
-    return state.valueOrNull;
+  T? valueOrNullOf<T>(TokenState<T> tokenState) {
+    return tokenState.valueOrNull;
   }
 
-  /// Emits the given [newValue] to the given [TokenState].
+  /// Emits the given [state] to the given [TokenState].
   @protected
   @visibleForTesting
-  void updateStateOf<T, S extends T>(TokenState<T> state, S newValue) {
-    state.add(newValue);
+  void emitStateOf<T, S extends T>(TokenState<T> tokenState, S state) {
+    tokenState.add(state);
   }
 
   /// Returns true if the [TokenState] has at least one value emmited.
   @protected
   @visibleForTesting
-  bool hasValueOf<T>(TokenState<T> state) {
-    return state.hasValue;
+  bool hasValueOf<T>(TokenState<T> tokenState) {
+    return tokenState.hasValue;
+  }
+
+  /// Emits the given [effect] to the given [tokenEffect].
+  @protected
+  @visibleForTesting
+  void emitEffectOf<T, S extends T>(TokenEffect<T> tokenEffect, S effect) {
+    tokenEffect.add(effect);
   }
 
   /// Closes all the [TokenSubject]s and cancels all the subscriptions.

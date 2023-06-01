@@ -49,6 +49,15 @@ void main() {
       );
 
       test(
+        'should emit the string effect when counterState is updated',
+        () async {
+          bloc.incrementCounterAction();
+          expect(bloc.counterState, emits(1));
+          expect(bloc.counterEffect, emits('Odd'));
+        },
+      );
+
+      test(
         'should throw an StateError when trying to interact with disposed TokenBloc',
         () async {
           bloc.dispose();

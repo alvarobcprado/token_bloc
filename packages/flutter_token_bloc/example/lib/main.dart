@@ -75,7 +75,7 @@ class MyCounterStateManager extends TokenBloc {
   final incrementAction = TokenActionVoid();
 
   void _handleIncrement() {
-    updateStateOf(counterState, valueOf(counterState) + 1);
+    emitStateOf(counterState, valueOf(counterState) + 1);
   }
 
   @override

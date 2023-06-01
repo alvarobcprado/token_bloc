@@ -12,19 +12,25 @@ class TestCounterBloc extends TokenBloc {
   final incrementCounterAction = TokenActionVoid();
   final decrementCounterAction = TokenActionVoid();
   final seededCounterState = TokenState.seeded(1);
+  final counterEffect = TokenEffect<String>();
 
   void _onIncrementAction() {
     final newValue = valueOrNullOf(counterState) ?? 0 + 1;
-    updateStateOf(counterState, newValue);
+    emitStateOf(counterState, newValue);
   }
 
   void _onDecrementAction() {
     final newValue = valueOrNullOf(counterState) ?? 0 - 1;
-    updateStateOf(counterState, newValue);
+    emitStateOf(counterState, newValue);
   }
 
   void _onCounterStateChanged(int state) {
-    updateStateOf(inverseCounterState, -state);
+    emitStateOf(inverseCounterState, -state);
+    if (state.isEven) {
+      emitEffectOf(counterEffect, 'Even');
+    } else {
+      emitEffectOf(counterEffect, 'Odd');
+    }
   }
 
   @override
