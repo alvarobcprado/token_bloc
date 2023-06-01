@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_token_bloc/flutter_token_bloc.dart';
 
+/// Builder for a widget based on the state of a [TokenState] with type [T].
+typedef GenericStateWidgetBuilder<T> = Widget Function(
+  BuildContext context,
+  T data,
+);
+
 /// {@template generic_state_builder}
-/// Widget that builds based on the state of a [TokenState] wich 2 generic
-/// states of type [T1] and [T2].
+/// Widget that builds based on the generic state types of a [TokenState] with
+/// type [T].
 ///
-/// If [tokenState] has no one of the 2 generic states, an
+/// If [tokenState] has no one of the generic states, an
 /// [UnknownStateTypeException] is thrown.
 /// {@endtemplate}
 class GenericStateBuilder2<T1 extends T, T2 extends T, T>
@@ -22,10 +28,10 @@ class GenericStateBuilder2<T1 extends T, T2 extends T, T>
   final TokenState<T> tokenState;
 
   /// The widget builder for the [T1] or null state.
-  final Widget Function(BuildContext context, T1? data) builder1;
+  final GenericStateWidgetBuilder<T1?> builder1;
 
   /// The widget builder for the [T2] state.
-  final Widget Function(BuildContext context, T2 data) builder2;
+  final GenericStateWidgetBuilder<T2> builder2;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +44,159 @@ class GenericStateBuilder2<T1 extends T, T2 extends T, T>
         }
         if (data is T2) {
           return builder2(context, data as T2);
+        }
+        throw UnknownStateTypeException();
+      },
+    );
+  }
+}
+
+/// {@macro generic_state_builder}
+class GenericStateBuilder3<T1 extends T, T2 extends T, T3 extends T, T>
+    extends StatelessWidget {
+  /// {@macro generic_state_builder}
+  const GenericStateBuilder3({
+    required this.tokenState,
+    required this.builder1,
+    required this.builder2,
+    required this.builder3,
+    super.key,
+  });
+
+  /// The [TokenState] to build the widget based on.
+  final TokenState<T> tokenState;
+
+  /// The widget builder for the [T1] or null state.
+  final GenericStateWidgetBuilder<T1?> builder1;
+
+  /// The widget builder for the [T2] state.
+  final GenericStateWidgetBuilder<T2> builder2;
+
+  /// The widget builder for the [T3] state.
+  final GenericStateWidgetBuilder<T3> builder3;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: tokenState,
+      builder: (context, snapshot) {
+        final data = snapshot.data;
+        if (data == null || data is T1) {
+          return builder1(context, data as T1?);
+        }
+        if (data is T2) {
+          return builder2(context, data as T2);
+        }
+        if (data is T3) {
+          return builder3(context, data as T3);
+        }
+        throw UnknownStateTypeException();
+      },
+    );
+  }
+}
+
+/// {@macro generic_state_builder}
+class GenericStateBuilder4<T1 extends T, T2 extends T, T3 extends T,
+    T4 extends T, T> extends StatelessWidget {
+  /// {@macro generic_state_builder}
+  const GenericStateBuilder4({
+    required this.tokenState,
+    required this.builder1,
+    required this.builder2,
+    required this.builder3,
+    required this.builder4,
+    super.key,
+  });
+
+  /// The [TokenState] to build the widget based on.
+  final TokenState<T> tokenState;
+
+  /// The widget builder for the [T1] or null state.
+  final GenericStateWidgetBuilder<T1?> builder1;
+
+  /// The widget builder for the [T2] state.
+  final GenericStateWidgetBuilder<T2> builder2;
+
+  /// The widget builder for the [T3] state.
+  final GenericStateWidgetBuilder<T3> builder3;
+
+  /// The widget builder for the [T4] state.
+  final GenericStateWidgetBuilder<T4> builder4;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: tokenState,
+      builder: (context, snapshot) {
+        final data = snapshot.data;
+        if (data == null || data is T1) {
+          return builder1(context, data as T1?);
+        }
+        if (data is T2) {
+          return builder2(context, data as T2);
+        }
+        if (data is T3) {
+          return builder3(context, data as T3);
+        }
+        if (data is T4) {
+          return builder4(context, data as T4);
+        }
+        throw UnknownStateTypeException();
+      },
+    );
+  }
+}
+
+/// {@macro generic_state_builder}
+class GenericStateBuilder5<T1 extends T, T2 extends T, T3 extends T,
+    T4 extends T, T5 extends T, T> extends StatelessWidget {
+  /// {@macro generic_state_builder}
+  const GenericStateBuilder5({
+    required this.tokenState,
+    required this.builder1,
+    required this.builder2,
+    required this.builder3,
+    required this.builder4,
+    required this.builder5,
+    super.key,
+  });
+
+  /// The [TokenState] to build the widget based on.
+  final TokenState<T> tokenState;
+
+  /// The widget builder for the [T1] or null state.
+  final GenericStateWidgetBuilder<T1?> builder1;
+
+  /// The widget builder for the [T2] state.
+  final GenericStateWidgetBuilder<T2> builder2;
+
+  /// The widget builder for the [T3] state.
+  final GenericStateWidgetBuilder<T3> builder3;
+
+  /// The widget builder for the [T4] state.
+  final GenericStateWidgetBuilder<T4> builder4;
+
+  /// The widget builder for the [T5] state.
+  final GenericStateWidgetBuilder<T5> builder5;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: tokenState,
+      builder: (context, snapshot) {
+        final data = snapshot.data;
+        if (data == null || data is T1) {
+          return builder1(context, data as T1?);
+        }
+        if (data is T2) {
+          return builder2(context, data as T2);
+        }
+        if (data is T3) {
+          return builder3(context, data as T3);
+        }
+        if (data is T4) {
+          return builder4(context, data as T4);
         }
         throw UnknownStateTypeException();
       },
