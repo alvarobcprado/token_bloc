@@ -180,16 +180,20 @@ class TokenState<T> extends TokenSubject<T> {
 @visibleForTesting
 extension TokenBlocExtension<T> on TokenState<T> {
   /// Returns the last emitted value of the [TokenState].
+  @visibleForTesting
   T get value => _stateSubject.value;
 
   /// Returns the last emitted value of the [TokenState] or null if no value
   /// has been emitted.
+  @visibleForTesting
   T? get valueOrNull => _stateSubject.valueOrNull;
 
   /// Returns true if the [TokenState] has emitted at least one value.
+  @visibleForTesting
   bool get hasValue => _stateSubject.hasValue;
 
   /// Sends an event T to the subject.
+  @visibleForTesting
   void add(T newValue) {
     _stateSubject.add(newValue);
   }
