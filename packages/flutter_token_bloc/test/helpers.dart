@@ -15,12 +15,12 @@ class TestCounterBloc extends TokenBloc {
   final counterEffect = TokenEffect<String>();
 
   void _onIncrementAction() {
-    final newValue = valueOrNullOf(counterState) ?? 0 + 1;
+    final newValue = (valueOrNullOf(counterState) ?? 0) + 1;
     emitStateOf(counterState, newValue);
   }
 
   void _onDecrementAction() {
-    final newValue = valueOrNullOf(counterState) ?? 0 - 1;
+    final newValue = (valueOrNullOf(counterState) ?? 0) - 1;
     emitStateOf(counterState, newValue);
   }
 
