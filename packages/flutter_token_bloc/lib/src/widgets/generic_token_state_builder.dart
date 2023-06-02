@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_token_bloc/flutter_token_bloc.dart';
 
 /// Builder for a widget based on the state of a [TokenState] with type [T].
-typedef GenericStateWidgetBuilder<T> = Widget Function(
+typedef TokenStateWidgetBuilder<T> = Widget Function(
   BuildContext context,
   T data,
 );
 
-/// {@template generic_state_builder}
+/// {@template generic_token_state_builder}
 /// Widget that builds based on the generic state types of a [TokenState] with
 /// type [T].
 ///
 /// If [tokenState] has no one of the generic states, an
 /// [UnknownStateTypeException] is thrown.
 /// {@endtemplate}
-class GenericStateBuilder2<T1 extends T, T2 extends T, T>
+class GenericTokenStateBuilder2<T1 extends T, T2 extends T, T>
     extends StatelessWidget {
-  /// {@macro generic_state_builder}
-  const GenericStateBuilder2({
+  /// {@macro generic_token_state_builder}
+  const GenericTokenStateBuilder2({
     required this.tokenState,
     required this.builder1,
     required this.builder2,
@@ -28,10 +28,10 @@ class GenericStateBuilder2<T1 extends T, T2 extends T, T>
   final TokenState<T> tokenState;
 
   /// The widget builder for the [T1] or null state.
-  final GenericStateWidgetBuilder<T1?> builder1;
+  final TokenStateWidgetBuilder<T1?> builder1;
 
   /// The widget builder for the [T2] state.
-  final GenericStateWidgetBuilder<T2> builder2;
+  final TokenStateWidgetBuilder<T2> builder2;
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +51,11 @@ class GenericStateBuilder2<T1 extends T, T2 extends T, T>
   }
 }
 
-/// {@macro generic_state_builder}
-class GenericStateBuilder3<T1 extends T, T2 extends T, T3 extends T, T>
+/// {@macro generic_token_state_builder}
+class GenericTokenStateBuilder3<T1 extends T, T2 extends T, T3 extends T, T>
     extends StatelessWidget {
-  /// {@macro generic_state_builder}
-  const GenericStateBuilder3({
+  /// {@macro generic_token_state_builder}
+  const GenericTokenStateBuilder3({
     required this.tokenState,
     required this.builder1,
     required this.builder2,
@@ -67,13 +67,13 @@ class GenericStateBuilder3<T1 extends T, T2 extends T, T3 extends T, T>
   final TokenState<T> tokenState;
 
   /// The widget builder for the [T1] or null state.
-  final GenericStateWidgetBuilder<T1?> builder1;
+  final TokenStateWidgetBuilder<T1?> builder1;
 
   /// The widget builder for the [T2] state.
-  final GenericStateWidgetBuilder<T2> builder2;
+  final TokenStateWidgetBuilder<T2> builder2;
 
   /// The widget builder for the [T3] state.
-  final GenericStateWidgetBuilder<T3> builder3;
+  final TokenStateWidgetBuilder<T3> builder3;
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +96,11 @@ class GenericStateBuilder3<T1 extends T, T2 extends T, T3 extends T, T>
   }
 }
 
-/// {@macro generic_state_builder}
-class GenericStateBuilder4<T1 extends T, T2 extends T, T3 extends T,
+/// {@macro generic_token_state_builder}
+class GenericTokenStateBuilder4<T1 extends T, T2 extends T, T3 extends T,
     T4 extends T, T> extends StatelessWidget {
-  /// {@macro generic_state_builder}
-  const GenericStateBuilder4({
+  /// {@macro generic_token_state_builder}
+  const GenericTokenStateBuilder4({
     required this.tokenState,
     required this.builder1,
     required this.builder2,
@@ -113,16 +113,16 @@ class GenericStateBuilder4<T1 extends T, T2 extends T, T3 extends T,
   final TokenState<T> tokenState;
 
   /// The widget builder for the [T1] or null state.
-  final GenericStateWidgetBuilder<T1?> builder1;
+  final TokenStateWidgetBuilder<T1?> builder1;
 
   /// The widget builder for the [T2] state.
-  final GenericStateWidgetBuilder<T2> builder2;
+  final TokenStateWidgetBuilder<T2> builder2;
 
   /// The widget builder for the [T3] state.
-  final GenericStateWidgetBuilder<T3> builder3;
+  final TokenStateWidgetBuilder<T3> builder3;
 
   /// The widget builder for the [T4] state.
-  final GenericStateWidgetBuilder<T4> builder4;
+  final TokenStateWidgetBuilder<T4> builder4;
 
   @override
   Widget build(BuildContext context) {
@@ -148,11 +148,11 @@ class GenericStateBuilder4<T1 extends T, T2 extends T, T3 extends T,
   }
 }
 
-/// {@macro generic_state_builder}
-class GenericStateBuilder5<T1 extends T, T2 extends T, T3 extends T,
+/// {@macro generic_token_state_builder}
+class GenericTokenStateBuilder5<T1 extends T, T2 extends T, T3 extends T,
     T4 extends T, T5 extends T, T> extends StatelessWidget {
-  /// {@macro generic_state_builder}
-  const GenericStateBuilder5({
+  /// {@macro generic_token_state_builder}
+  const GenericTokenStateBuilder5({
     required this.tokenState,
     required this.builder1,
     required this.builder2,
@@ -166,19 +166,19 @@ class GenericStateBuilder5<T1 extends T, T2 extends T, T3 extends T,
   final TokenState<T> tokenState;
 
   /// The widget builder for the [T1] or null state.
-  final GenericStateWidgetBuilder<T1?> builder1;
+  final TokenStateWidgetBuilder<T1?> builder1;
 
   /// The widget builder for the [T2] state.
-  final GenericStateWidgetBuilder<T2> builder2;
+  final TokenStateWidgetBuilder<T2> builder2;
 
   /// The widget builder for the [T3] state.
-  final GenericStateWidgetBuilder<T3> builder3;
+  final TokenStateWidgetBuilder<T3> builder3;
 
   /// The widget builder for the [T4] state.
-  final GenericStateWidgetBuilder<T4> builder4;
+  final TokenStateWidgetBuilder<T4> builder4;
 
   /// The widget builder for the [T5] state.
-  final GenericStateWidgetBuilder<T5> builder5;
+  final TokenStateWidgetBuilder<T5> builder5;
 
   @override
   Widget build(BuildContext context) {
@@ -209,11 +209,11 @@ class GenericStateBuilder5<T1 extends T, T2 extends T, T3 extends T,
 }
 
 /// Used to throw an exception when the state type is not defined in the
-/// GenericStateBuilder widgets.
+/// GenericTokenStateBuilder widgets.
 class UnknownStateTypeException implements Exception {
   @override
   String toString() {
     // ignore: lines_longer_than_80_chars
-    return 'UnknownStateTypeException: The state type is not defined in the GenericStateBuilder';
+    return 'UnknownStateTypeException: The state type is not defined in the GenericTokenStateBuilder';
   }
 }

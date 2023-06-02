@@ -11,9 +11,9 @@ import 'package:token_bloc/token_bloc.dart';
 /// The [listenWhen] is called every time the [TokenEffect] emits and if it
 /// returns true, [onEffect] is called.
 /// {@endtemplate}
-class EffectListener<T> extends StatefulWidget {
+class TokenEffectListener<T> extends StatefulWidget {
   /// {@macro effect_listener}
-  const EffectListener({
+  const TokenEffectListener({
     required this.child,
     required this.tokenEffect,
     required this.onEffect,
@@ -34,10 +34,10 @@ class EffectListener<T> extends StatefulWidget {
   final bool Function(T? previousEffect, T currentEffect)? listenWhen;
 
   @override
-  _EffectListenerState<T> createState() => _EffectListenerState<T>();
+  _TokenEffectListenerState<T> createState() => _TokenEffectListenerState<T>();
 }
 
-class _EffectListenerState<T> extends State<EffectListener<T>> {
+class _TokenEffectListenerState<T> extends State<TokenEffectListener<T>> {
   late final StreamSubscription<T> _subscription;
   T? _previousEffect;
 

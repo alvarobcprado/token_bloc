@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:token_bloc/token_bloc.dart';
+import 'package:flutter_token_bloc/flutter_token_bloc.dart';
 
 /// {@template single_state_builder}
 /// Widget that builds based on the state of a [TokenState] with type [T].
@@ -14,9 +14,9 @@ import 'package:token_bloc/token_bloc.dart';
 /// If [emptyState] is provided, it is shown when the [tokenState] has no state
 /// emitted. By default, it is a SizedBox.shrink().
 /// {@endtemplate}
-class SingleStateBuilder<T> extends StatefulWidget {
+class SingleTokenStateBuilder<T> extends StatefulWidget {
   /// {@macro single_state_builder}
-  const SingleStateBuilder({
+  const SingleTokenStateBuilder({
     required this.tokenState,
     required this.builder,
     this.emptyState = const SizedBox.shrink(),
@@ -29,7 +29,7 @@ class SingleStateBuilder<T> extends StatefulWidget {
   final TokenState<T> tokenState;
 
   /// The widget builder for the [TokenState].
-  final Widget Function(BuildContext context, T state) builder;
+  final TokenStateWidgetBuilder<T> builder;
 
   /// The function that determines if the [builder] should be rebuilt.
   final bool Function(T? previousState, T currentState)? buildWhen;
@@ -42,10 +42,12 @@ class SingleStateBuilder<T> extends StatefulWidget {
   final T? initialData;
 
   @override
-  State<SingleStateBuilder<T>> createState() => _SingleStateBuilderState<T>();
+  State<SingleTokenStateBuilder<T>> createState() =>
+      _SingleTokenStateBuilderState<T>();
 }
 
-class _SingleStateBuilderState<T> extends State<SingleStateBuilder<T>> {
+class _SingleTokenStateBuilderState<T>
+    extends State<SingleTokenStateBuilder<T>> {
   late final StreamSubscription<T> _subscription;
   T? _previousState;
   T? _currentState;
