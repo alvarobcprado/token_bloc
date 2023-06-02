@@ -39,5 +39,7 @@ class TestCounterBloc extends TokenBloc {
         inverseCounterState,
         incrementCounterAction,
         decrementCounterAction,
+        seededCounterState,
+        counterEffect,
       ];
 }

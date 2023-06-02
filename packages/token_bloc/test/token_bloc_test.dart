@@ -1,6 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:test/test.dart';
+import 'package:token_bloc/token_bloc.dart';
 import 'package:token_bloc/token_rx_utils.dart';
 
 import 'helpers.dart';
@@ -108,6 +109,56 @@ void main() {
         'should return the false when hasValueOf is called on a TokenState without a value',
         () async {
           expect(bloc.hasValueOf(bloc.counterState), false);
+        },
+      );
+
+      test(
+        'should throw a StateError when hasValueOf is called on an external TokenState',
+        () async {
+          expect(
+            () => bloc.hasValueOf(TokenState<int>()),
+            throwsA(isA<StateError>()),
+          );
+        },
+      );
+
+      test(
+        'should throw a StateError when valueOrNullOf is called on an external TokenState',
+        () async {
+          expect(
+            () => bloc.valueOrNullOf(TokenState<int>()),
+            throwsA(isA<StateError>()),
+          );
+        },
+      );
+
+      test(
+        'should throw a StateError when valueOf is called on an external TokenState',
+        () async {
+          expect(
+            () => bloc.valueOf(TokenState<int>()),
+            throwsA(isA<StateError>()),
+          );
+        },
+      );
+
+      test(
+        'should throw a StateError when emitStateOf is called on an external TokenState',
+        () async {
+          expect(
+            () => bloc.emitStateOf(TokenState<int>(), 0),
+            throwsA(isA<StateError>()),
+          );
+        },
+      );
+
+      test(
+        'should throw a StateError when emitEffectOf is called on an external TokenState',
+        () async {
+          expect(
+            () => bloc.emitEffectOf(TokenEffect<int>(), 0),
+            throwsA(isA<StateError>()),
+          );
         },
       );
     },
