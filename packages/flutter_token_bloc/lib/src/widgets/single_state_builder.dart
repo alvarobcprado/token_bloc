@@ -20,6 +20,7 @@ class SingleStateBuilder<T> extends StatefulWidget {
     required this.tokenState,
     required this.builder,
     this.emptyState = const SizedBox.shrink(),
+    this.initialData,
     this.buildWhen,
     super.key,
   });
@@ -36,6 +37,10 @@ class SingleStateBuilder<T> extends StatefulWidget {
   /// The widget to show when the [tokenState] has no state.
   final Widget emptyState;
 
+  /// The initial state of the [tokenState]. If null, [emptyState] is shown when
+  /// the [tokenState] has no state.
+  final T? initialData;
+
   @override
   State<SingleStateBuilder<T>> createState() => _SingleStateBuilderState<T>();
 }
@@ -48,6 +53,7 @@ class _SingleStateBuilderState<T> extends State<SingleStateBuilder<T>> {
   @override
   void initState() {
     super.initState();
+    _currentState = widget.initialData;
     _subscription = widget.tokenState.listen(_handleState);
   }
 
