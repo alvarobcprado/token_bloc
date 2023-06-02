@@ -1,39 +1,31 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<div style="text-align: center; font-family: times new roman">
+<h1>TokenBloc</h1>
+  <a href="https://pub.dev/packages/token_bloc"><img src="https://img.shields.io/pub/v/token_bloc.svg" alt="Pub.dev Badge"></a>
+	<a href="https://github.com/alvarobcprado/token_bloc/actions"><img src="https://github.com/alvarobcprado/token_bloc/actions/workflows/test.yml/badge.svg" alt="GitHub Build Badge"></a>
+	<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="MIT License Badge"></a>
+  <a href="https://pub.dev/packages/very_good_analysis"><img src="https://img.shields.io/badge/style-very_good_analysis-B22C89.svg" alt="Very Good Analysis Style Badge"></a>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+</div>
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+## About
+A dart package that acts as a wrapper for the popular [RxDart](https://pub.dev/packages/rxdart) library to helps implement the [BLoC design pattern](https://www.flutteris.com/blog/en/reactive-programming-streams-bloc).
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+For flutter usage, check out the [flutter_token_bloc](https://pub.dev/packages/flutter_token_bloc) package.
 
-## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+To create a simple TokenBloc class:
 
 ```dart
-const like = 'sample';
+
 ```
 
-## Additional information
+## Contributing
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+We welcome contributions to this package. If you would like to contribute, please feel free to open an issue or a pull request.
+
+## License
+
+ReStateAction is licensed under the MIT License. See the [LICENSE](https://github.com/alvarobcprado/token_bloc/blob/main/packages/token_bloc/LICENSE) for details.
