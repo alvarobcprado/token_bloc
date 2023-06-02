@@ -198,8 +198,22 @@ class GenericStateBuilder5<T1 extends T, T2 extends T, T3 extends T,
         if (data is T4) {
           return builder4(context, data as T4);
         }
+        if (data is T5) {
+          return builder5(context, data as T5);
+        }
+
         throw UnknownStateTypeException();
       },
     );
+  }
+}
+
+/// Used to throw an exception when the state type is not defined in the
+/// GenericStateBuilder widgets.
+class UnknownStateTypeException implements Exception {
+  @override
+  String toString() {
+    // ignore: lines_longer_than_80_chars
+    return 'UnknownStateTypeException: The state type is not defined in the GenericStateBuilder';
   }
 }
