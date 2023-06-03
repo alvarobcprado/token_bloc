@@ -1,0 +1,44 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: flutter_token_bloc
+
+on:
+  push:
+    paths:
+      - "packages/flutter_token_bloc/**"
+      - ".github/workflows/flutter_token_bloc.yml"
+      
+  pull_request:
+    paths:
+      - "packages/flutter_token_bloc/**"
+      - ".github/workflows/flutter_token_bloc.yml"
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: packages/flutter_token_bloc
+        
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: dart analyze --fatal-infos --fatal-warnings .
+
+      - name: Run tests
+        run: flutter test
