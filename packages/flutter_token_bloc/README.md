@@ -1,5 +1,5 @@
 <div style="text-align: center; font-family: times new roman">
-<h1>TokenBloc</h1>
+<h1>Flutter TokenBloc</h1>
   <a href="https://pub.dev/packages/flutter_token_bloc"><img src="https://img.shields.io/pub/v/flutter_token_bloc.svg" alt="Pub.dev Badge"></a>
 	<a href="https://github.com/alvarobcprado/token_bloc/actions"><img src="https://github.com/alvarobcprado/token_bloc/actions/workflows/flutter_token_bloc.yml/badge.svg" alt="GitHub Build Badge"></a>
 	<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="MIT License Badge"></a>
