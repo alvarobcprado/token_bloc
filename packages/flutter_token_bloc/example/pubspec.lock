@@ -81,7 +81,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.1.0"
   js:
     dependency: transitive
     description:
@@ -194,12 +194,11 @@ packages:
   token_bloc:
     dependency: transitive
     description:
-      path: "packages/token_bloc"
-      ref: HEAD
-      resolved-ref: d7543692d377cd0d0316adfa27dc5dcd97387bf5
-      url: "https://github.com/alvarobcprado/token_bloc"
-    source: git
-    version: "1.0.0"
+      name: token_bloc
+      sha256: "73f98922ab5a90d3d46339bf824b920911649b13f97282bb2c81947d07344b6c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   vector_math:
     dependency: transitive
     description:
