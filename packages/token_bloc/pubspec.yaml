@@ -1,6 +1,6 @@
 name: token_bloc
 description: A library that helps implement the BLoC design pattern with the power of Dart Stream extended by the capabilities provided by the RxDart library.
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/alvarobcprado/token_bloc/tree/main/packages/token_bloc
 issue_tracker: https://github.com/alvarobcprado/token_bloc/issues
 homepage: https://github.com/alvarobcprado/token_bloc

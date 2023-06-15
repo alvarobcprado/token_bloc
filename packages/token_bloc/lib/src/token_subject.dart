@@ -22,7 +22,7 @@ abstract class TokenSubject<T> extends StreamView<T> {
   }
 }
 
-/// {@template token_state}
+/// {@template token_action}
 /// A [TokenSubject] that holds a [PublishSubject].
 ///
 /// It is used to dispatch actions with type [T] for [TokenBloc] process it.
@@ -34,7 +34,7 @@ abstract class TokenSubject<T> extends StreamView<T> {
 /// ```
 /// {@endtemplate}
 class TokenAction<T> extends TokenSubject<T> {
-  /// {@macro token_state}
+  /// {@macro token_action}
   TokenAction({
     void Function()? onListen,
     void Function()? onCancel,
@@ -53,7 +53,7 @@ class TokenAction<T> extends TokenSubject<T> {
   }
 }
 
-/// {@template token_state}
+/// {@template token_action_void}
 /// A [TokenAction] that holds [PublishSubject] with a void type.
 ///
 /// It is used to dispatch actions without a value for [TokenBloc] process it.
@@ -65,7 +65,7 @@ class TokenAction<T> extends TokenSubject<T> {
 /// ```
 /// {@endtemplate}
 class TokenActionVoid extends TokenAction<void> {
-  /// {@macro token_state}
+  /// {@macro token_action_void}
   TokenActionVoid({
     super.onListen,
     super.onCancel,
@@ -78,7 +78,7 @@ class TokenActionVoid extends TokenAction<void> {
   }
 }
 
-/// {@template token_state}
+/// {@template token_action_state}
 /// A special [TokenSubject] that acts as a [TokenAction] but holds a
 /// [TokenState].
 ///
@@ -92,7 +92,7 @@ class TokenActionVoid extends TokenAction<void> {
 /// ```
 /// {@endtemplate}
 class TokenActionState<T> extends TokenState<T> {
-  /// {@macro token_state}
+  /// {@macro token_action_state}
   TokenActionState({
     super.onListen,
     super.onCancel,
@@ -211,7 +211,7 @@ class TokenState<T> extends TokenSubject<T> {
 /// {@endtemplate}
 ///
 class TokenEffect<T> extends TokenSubject<T> {
-  /// {@macro token_state}
+  /// {@macro token_effect}
   TokenEffect({
     void Function()? onListen,
     void Function()? onCancel,
