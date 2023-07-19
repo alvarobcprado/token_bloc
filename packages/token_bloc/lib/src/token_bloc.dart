@@ -21,11 +21,11 @@ typedef VoidCallback = void Function();
 ///
 /// Example of usage:
 /// ```dart
-/// class MyStateManager extends TokenStateManager {
+/// class MyStateManager extends TokenBloc {
 ///  MyStateManager() {
 ///  on<int>(counterState, (value) => print(value));
-///  onVoid(incrementAction, () => updateStateOf(counterState, valueOf(counterState) + 1));
-///  onVoid(decrementAction, () => updateStateOf(counterState, valueOf(counterState) - 1));
+///  onVoid(incrementAction, () => emitStateOf(counterState, valueOf(counterState) + 1));
+///  onVoid(decrementAction, () => emitStateOf(counterState, valueOf(counterState) - 1));
 /// }
 ///
 ///  @override
